@@ -9,6 +9,8 @@
 
 #include <QMainWindow>
 
+#include "sansdata.h"
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

@@ -8,5 +8,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+    SANSData *sans_data = new SANSData();
+
 
 }
