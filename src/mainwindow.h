@@ -8,8 +8,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QThread>
+#include <QDebug>
 
 #include "sansdata.h"
+#include "importfile.h"
 
 class MainWindow : public QMainWindow
 {

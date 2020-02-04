@@ -6,11 +6,13 @@ TARGET = gap
 TEMPLATE = app
 
 SOURCES += \
+        src/importfile.cpp \
         src/sansdata.cpp \
         src/main.cpp \
         src/mainwindow.cpp
 
 HEADERS += \
+        src/importfile.h \
         src/sansdata.h \
         src/mainwindow.h
 
