@@ -186,8 +186,21 @@ QVector<double> ImportFile::MLZComaSeporator(QString raw_number_array){
     return retval;
 }
 
+/* NEED TEST */
 QVector<double> ImportFile::MLZ10Symbols(QString raw_number_array){
     QVector<double> retval;
+    QString tmp;
+    raw_number_array.simplified();
+    int ten_count = 0;
+    for(int i=0;i<raw_number_array.size();i++){
+        tmp.append(raw_number_array.at(i));
+        if(ten_count == 9){
+            ten_count = 0;
+            retval.append(QString(tmp).toDouble());
+            tmp = "";
+        }
+        ten_count++;
+    }
 
     return retval;
 }
