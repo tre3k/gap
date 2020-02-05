@@ -287,6 +287,7 @@ void MapSANSPlot::setSANSData(SANSData *sans_data){
 }
 
 void MapSANSPlot::setUnitAxis(int unit){
+    if(s_d == nullptr) return;
     switch(unit){
     case Gap::pixel_unit:
         colorMap->data()->setRange(QCPRange(0,s_d->getRawMapSize().x),

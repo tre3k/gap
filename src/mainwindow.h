@@ -16,6 +16,7 @@
 #include "sansdata.h"
 #include "importfile.h"
 #include "plots.h"
+#include "sansdataviewer.h"
 
 class MainWindow : public QMainWindow
 {
