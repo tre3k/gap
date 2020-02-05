@@ -1,7 +1,9 @@
 /*
- * Under license GNU GLP (c) 2020
+ * File: mainwindow.h
+ * License: GNU GLPv3 (c) 2020
  * Autor: Kirill Pshenichnyi
  *
+ *  This is part of software "gap"
  */
 
 #ifndef MAINWINDOW_H
@@ -13,6 +15,7 @@
 
 #include "sansdata.h"
 #include "importfile.h"
+#include "plots.h"
 
 class MainWindow : public QMainWindow
 {

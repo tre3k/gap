@@ -1,7 +1,9 @@
 /*
- * Under license GNU GLP (c) 2020
+ * File: mainwindow.cpp
+ * License: GNU GLPv3 (c) 2020
  * Autor: Kirill Pshenichnyi
  *
+ *  This is part of software "gap"
  */
 
 #include "mainwindow.h"
@@ -10,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     SANSData *sans_data = nullptr;
     ImportFile *import_file = new ImportFile("test_files/D0429428.001");
-    import_file->open("test_files/D0439792.300");
 
     //ImportFile *import_file = new ImportFile("test_files/D0439792.300");
     //ImportFile *import_file = new ImportFile("test_files/D0439732.303");
@@ -26,11 +27,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     qDebug() << "Monitor: " << sans_data->getMonitroCounter();
 
 
-    for(int i=0;i<sans_data->getRawMapSize().x;i++){
-        for(int j=0;j<sans_data->getRawMapSize().y;j++){
-            qDebug() << sans_data->getMapAt(i,j);
-        }
-    }
+    auto i_plot = new InteractivePlot();
+    this->setCentralWidget(i_plot);
+
 
 
 }
