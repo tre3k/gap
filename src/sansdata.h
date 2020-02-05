@@ -11,10 +11,15 @@
 #include <QString>
 #include <QDateTime>
 
+#include <QtMath>
+
 class SANSData : public QObject
 {
     Q_OBJECT
 public:
+    SANSData(int size_x = 0, int size_y = 0, QObject *parent = nullptr);
+    ~SANSData();
+
     enum polarization_type{
         NON_POLARIZATE,
         POLARIZATE_UP,
@@ -30,9 +35,44 @@ public:
         MAGNET_DINAMYCS
     };
 
+private:
+    double wavelenght;                                      // Wavelenght in Agnstrom [A]
+    double ds_distance;                                     // Distance of soruce to detector in meters [m]
+    double monitor_counter = 1.0;                           // just monitor counter (before sample enviroment)
+    //double amount_count;                                  // all counts [ - reservate - ]
+    double time = 1.0;                                      // time of measurement int sec [s]
+    double field;                                           // magnetic field int Tesla [T]
+    double temperature;                                     // temperature of sample in Kelvin [K]
+
+    int s_x,s_y;                                            // sizee of intencity map
+    double **raw_map;                                       // intencity 2D map
+    //double *raw_data;                                     // 1D plolt           [ - reservate - ]
+
+    QString name;                                           // name
+    QString proposal;                                       // proposal name
+    QString title;                                          // title
+    QString sample_name;
+    QString user;
+    QDateTime dt_file;                                      // date & time file creation
+    QDateTime dt_start;                                     // date & time start measurement
+    QDateTime dt_end;                                       // date & time end measurmenet
+    struct s_detector_resolution{                           // resolution of detector in [mm] at pixel
+        double x,y;                                         // (for SANS (FRMII) it is 8x8 mm/pixel)
+    } detector_resolution;
+    struct s_border{
+        double x,y;                                         // border of vector Q for different units
+    } typedef border;
+
+    bool is_normalize = false;
+    bool is_map_created = false;
+    polarization_type pol_type;
+    double monitor_percent = .2;                            // efficienty of monitor from 0 to 1, (default 0.2 - 20%)
+
+private:
+    void initEmptyRawMap();                                 // size_x and size_y must be initialized int s_x and s_y
+    void deleteRawMap();
+
 public:
-    SANSData(int size_x = 0, int size_y = 0, QObject *parent = nullptr);
-    ~SANSData();
     void newRawMap(int size_x = 0, int size_y = 0);
 
     /* Set and Get ds_distance */
@@ -128,6 +168,15 @@ public:
     QString getUser(void){
         return user;
     }
+    /* Set and Get "detector_resolutin" */
+    void setDetectorResolution(double x_resolution, double y_resolution){
+        detector_resolution.x = x_resolution;
+        detector_resolution.y = y_resolution;
+        return;
+    }
+    s_detector_resolution getDetectorResolution(void){
+        return detector_resolution;
+    }
 
     /* Set and Get datetimes */
     void setDateTimeFileISODate(QString datetime);
@@ -185,36 +234,11 @@ public:
     double getMapAt(int i, int j);
     void setMapAt(int i, int j, double value);
 
-private:
-    double wavelenght;                                      // Wavelenght in Agnstrom [A]
-    double ds_distance;                                     // Distance of soruce to detector in meters [m]
-    double monitor_counter;                                 // just monitor counter (before sample enviroment)
-    //double amount_count;                                  // all counts [ - reservate - ]
-    double time;                                            // time of measurement int sec [s]
-    double field;                                           // magnetic field int Tesla [T]
-    double temperature;                                     // temperature of sample in Kelvin [K]
-
-    int s_x,s_y;                                            // sizee of intencity map
-    double **raw_map;                                       // intencity 2D map
-    //double *raw_data;                                     // 1D plolt           [ - reservate - ]
-
-    QString name;                                           // name
-    QString proposal;                                       // proposal name
-    QString title;                                          // title
-    QString sample_name;
-    QString user;
-    QDateTime dt_file;                                      // date & time file creation
-    QDateTime dt_start;                                     // date & time start measurement
-    QDateTime dt_end;                                       // date & time end measurmenet
-
-    bool is_normalize = false;
-    bool is_map_created = false;
-    polarization_type pol_type;
-    double monitor_percent = .2;                            // efficienty of monitor from 0 to 1, (default 0.2 - 20%)
-
-private:
-    void initEmptyRawMap();                                 // size_x and size_y must be initialized int s_x and s_y
-    void deleteRawMap();
+    /* convert for theta,angstrom,nanometers from pixels */
+    border getQBorderRad(void);
+    border getQBorderMrad(void);
+    border getQBorderAngstrom(void);
+    border getQBorderNanometers(void);
 
 };
 

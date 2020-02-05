@@ -40,6 +40,7 @@ public:
     void open(QString filename);
     void close(void);
     SANSData *getSANSData(void);
+    void getSANSData(SANSData *sans_data);
 
     bool isOpen(void){
         return is_open;

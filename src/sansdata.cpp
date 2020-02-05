@@ -49,7 +49,7 @@ void SANSData::deleteRawMap(){
 
 /* convert intencity unit from count to arb.units/time */
 void SANSData::normalize(){
-    if(raw_map == nullptr) return;
+    if(raw_map == nullptr || is_normalize) return;
 
     double incident_intencity = monitor_counter/monitor_percent;
 
@@ -100,3 +100,44 @@ double SANSData::getMapAt(int i, int j){
 void SANSData::setMapAt(int i, int j, double value){
     if(i >= 0 && i < s_x && j >= 0 && j < s_y) raw_map[i][j] = value;
 }
+
+/* convert Q units */
+SANSData::border SANSData::getQBorderRad(){
+    border retval;
+
+    double Lx = detector_resolution.x*s_x/1000;                 //size of detector in meters
+    double Ly = detector_resolution.y*s_y/1000;
+
+    retval.x = atan(Lx/2/ds_distance);
+    retval.y = atan(Ly/2/ds_distance);
+
+    return retval;
+}
+
+SANSData::border SANSData::getQBorderMrad(){
+    border retval;
+    retval = getQBorderRad();
+    retval.x *= 1000;
+    retval.y *= 1000;
+    return retval;
+}
+
+SANSData::border SANSData::getQBorderAngstrom(){
+    border retval;
+    double k_i = 2*M_PI/wavelenght;                              // in 1/Angstrom
+    retval = getQBorderRad();
+    retval.x *= k_i;
+    retval.y *= k_i;
+    return retval;
+}
+
+SANSData::border SANSData::getQBorderNanometers(){
+    border retval;
+    retval = getQBorderAngstrom();
+    retval.x *= 10;
+    retval.y *= 10;
+    return retval;
+}
+
+
+

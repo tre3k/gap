@@ -47,6 +47,11 @@ void ImportFile::close(){
     is_open = false;
 }
 
+void ImportFile::getSANSData(SANSData *sans_data){
+    if(sans_data != nullptr) delete sans_data;
+    sans_data = getSANSData();
+}
+
 SANSData *ImportFile::getSANSData(){
     SANSData *sans_data;
     if(!is_open || filetype == UNKNOWN) return nullptr;
@@ -57,6 +62,7 @@ SANSData *ImportFile::getSANSData(){
         break;                          // =)
 
     case MLZ_FRM2:
+        sans_data->setDetectorResolution(8,8);  // DEBUG for SANS-1 machine 8x8 mm resolution
         parserMLZ(sans_data);
         break;
 
@@ -171,8 +177,8 @@ void ImportFile::parserMLZ(SANSData *sans_data){
     }
 
     int count = 0;
-    for(int i=0; i<sans_data->getRawMapSize().x; i++){
-        for(int j=0; j<sans_data->getRawMapSize().y; j++){
+    for(int j=0; j<sans_data->getRawMapSize().y; j++){
+        for(int i=0; i<sans_data->getRawMapSize().x; i++){
             sans_data->setMapAt(i,j,number_array.at(count));
             count++;
         }
