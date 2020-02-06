@@ -8,6 +8,7 @@ TEMPLATE = app
 SOURCES += \
         src/generealwidget.cpp \
         src/importfile.cpp \
+        src/importfileswidget.cpp \
         src/sansdata.cpp \
         src/main.cpp \
         src/mainwindow.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
         src/generealwidget.h \
         src/importfile.h \
+        src/importfileswidget.h \
         src/sansdata.h \
         src/mainwindow.h \
         src/plots.h \

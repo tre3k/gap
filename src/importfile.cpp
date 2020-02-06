@@ -47,18 +47,18 @@ void ImportFile::close(){
     is_open = false;
 }
 
-void ImportFile::getSANSData(SANSData *sans_data){
-    if(sans_data != nullptr) delete sans_data;
-    sans_data = getSANSData();
+SANSData *ImportFile::getSANSData(){
+    SANSData *sans_data = new SANSData();
+    getSANSData(sans_data);
+    return sans_data;
 }
 
-SANSData *ImportFile::getSANSData(){
-    SANSData *sans_data;
-    if(!is_open || filetype == UNKNOWN) return nullptr;
-    sans_data = new SANSData();
+void ImportFile::getSANSData(SANSData *sans_data){
+    if(!is_open || filetype == UNKNOWN) return;
+    sans_data->clean();
     switch(filetype){
     default:
-        return nullptr;
+        return;
         break;                          // =)
 
     case MLZ_FRM2:
@@ -70,7 +70,6 @@ SANSData *ImportFile::getSANSData(){
     }
 
     this->close();
-    return sans_data;
 }
 
 void ImportFile::parserMLZ(SANSData *sans_data){

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     // More tests....
 
+    /*
     SANSData *sans_data = nullptr;
     ImportFile *import_file = new ImportFile();
 
@@ -41,8 +42,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 
     SANSDataViewer *viewer = new SANSDataViewer();
-    this->setCentralWidget(viewer);
     viewer->viewSANSData(sans_data);
+    */
 
-    delete sans_data;
+    ImportFilesWidget *import_files_widget = new ImportFilesWidget();
+
+    this->setCentralWidget(import_files_widget);
+
 }

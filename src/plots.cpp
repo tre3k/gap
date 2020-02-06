@@ -160,7 +160,6 @@ InteractivePlot::~InteractivePlot(){
 MapSANSPlot::MapSANSPlot(QWidget *parent) : GenerealWidget(parent)
 {
     plot = new InteractivePlot();
-    central_layout = new QVBoxLayout(this);                                                     // main layout in this widget
     tool_layout_one = new QHBoxLayout();
     tool_layout_two = new QHBoxLayout();
 

@@ -17,6 +17,7 @@
 #include "importfile.h"
 #include "plots.h"
 #include "sansdataviewer.h"
+#include "importfileswidget.h"
 
 class MainWindow : public QMainWindow
 {

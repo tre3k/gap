@@ -11,6 +11,7 @@
 #define GENEREALWIDGET_H
 
 #include <QWidget>
+#include <QVBoxLayout>
 
 class GenerealWidget : public QWidget
 {
@@ -18,6 +19,13 @@ class GenerealWidget : public QWidget
 public:
     explicit GenerealWidget(QWidget *parent = nullptr);
     ~GenerealWidget();
+
+public:
+    void addWidget(QWidget *widget);
+    void addLayout(QLayout *layout);
+
+protected:
+    QVBoxLayout *central_layout;
 
 signals:
 

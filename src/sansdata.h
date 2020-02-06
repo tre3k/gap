@@ -56,6 +56,10 @@ private:
     QDateTime dt_file;                                      // date & time file creation
     QDateTime dt_start;                                     // date & time start measurement
     QDateTime dt_end;                                       // date & time end measurmenet
+    struct s_size{                                          // size of map
+        int x;
+        int y;
+    };
     struct s_detector_resolution{                           // resolution of detector in [mm] at pixel
         double x,y;                                         // (for SANS (FRMII) it is 8x8 mm/pixel)
     } detector_resolution;
@@ -197,10 +201,6 @@ public:
     }
 
     /* get size of intencity map*/
-    struct s_size{
-        int x;
-        int y;
-    };
     s_size getRawMapSize(void){
         s_size retval;
         retval.x = s_x;
@@ -240,6 +240,7 @@ public:
     border getQBorderAngstrom(void);
     border getQBorderNanometers(void);
 
+    void clean(void);
 };
 
 #endif // SANSDATA_H

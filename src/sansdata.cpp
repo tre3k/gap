@@ -45,6 +45,8 @@ void SANSData::deleteRawMap(){
     for(int i=0;i<s_x;i++) delete raw_map[i];
     is_map_created = false;
     delete raw_map;
+    s_x = 0;
+    s_y = 0;
 }
 
 /* convert intencity unit from count to arb.units/time */
@@ -139,5 +141,30 @@ SANSData::border SANSData::getQBorderNanometers(){
     return retval;
 }
 
+void SANSData::clean(){
+    deleteRawMap();
 
+    wavelenght = 0.0;
+    ds_distance = 0.0;
+    monitor_counter = 1.0;
+    time = 1.0;
+    field = 0.0;
+    temperature = -1;
 
+    name.clear();
+    proposal.clear();
+    title.clear();
+    sample_name.clear();
+    user.clear();
+    dt_file = QDateTime::fromTime_t(0);
+    dt_start = QDateTime::fromTime_t(0);
+    dt_end = QDateTime::fromTime_t(0);
+    detector_resolution.x = 0;
+    detector_resolution.y = 0;
+
+    is_normalize = false;
+    is_map_created = false;
+    pol_type = NON_POLARIZATE;
+    monitor_percent = .2;
+
+}

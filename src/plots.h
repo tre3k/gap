@@ -85,8 +85,6 @@ private:
 
 protected:
     InteractivePlot *plot;
-
-    QVBoxLayout *central_layout;
     QHBoxLayout *tool_layout_one;
     QHBoxLayout *tool_layout_two;
 

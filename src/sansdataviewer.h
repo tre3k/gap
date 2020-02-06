@@ -4,6 +4,8 @@
  *  Autor: Kirill Pshenichnyi
  *
  *  This is part of software "gap"
+ *
+ *  Widget with Map Plot and other information about SANS data
  */
 
 
@@ -14,7 +16,9 @@
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QLabel>
+#include <QGroupBox>
 
+#include "sansdata.h"
 #include "generealwidget.h"
 #include "sansdata.h"
 #include "plots.h"
@@ -29,7 +33,7 @@ public:
     void viewSANSData(SANSData *sans_data);
 
 private:
-    QVBoxLayout *central_layout;
+    //QVBoxLayout *central_layout;
     GenerealWidget *bottom_widget;
 
     MapSANSPlot *map_plot;
@@ -38,8 +42,10 @@ private:
     QLabel *sample;
     QLabel *temperature;
     QLabel *field;
+    QLabel *time;
     QLabel *proposal;
-
+    QLabel *title;
+    QLabel *users;
 
 signals:
 
