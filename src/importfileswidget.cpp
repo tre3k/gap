@@ -1,4 +1,23 @@
+/*
+ *  File: importfileswidget.cpp
+ *  License: GNU GLPv3 (c) 2020
+ *  Autor: Kirill Pshenichnyi
+ *
+ *  This is part of software "gap"
+ */
+
+/*
+ *   | splitter                                    |
+ *   | - left_widget         | - sans_data_viewer  |
+ *   | -- top_left_layout    |                     |
+ *   | -- list_widget        |                     |
+ *   | -- bottom_left_layout |                     |
+ *
+ */
+
+
 #include "importfileswidget.h"
+
 
 ImportFilesWidget::ImportFilesWidget(QWidget *parent) : GenerealWidget(parent)
 {
@@ -117,16 +136,23 @@ void ImportFilesWidget::selectedItem(int row){
 
 void ImportFilesWidget::cleanSelected(){
     bool trigger = true;
+    disconnect(list_widget,SIGNAL(currentRowChanged(int)),this,SLOT(selectedItem(int)));
     while(trigger){
         trigger = false;
+        if(open_files.count() == 1 && list_widget->item(0)->checkState() == Qt::Checked){
+            qDebug () << "last!";
+            //open_files.clear();
+            //list_widget->clear();   what the bug????? Qt?  segmentation fault
+            break;
+        }
         for(int i=0;i<open_files.count();i++){
             if(list_widget->item(i)->checkState()==Qt::Checked){
                 delete list_widget->takeItem(i);
                 open_files.removeAt(i);
-                qDebug() << "remove " << i;
                 trigger = true;
                 break;
             }
         }
     }
+    connect(list_widget,SIGNAL(currentRowChanged(int)),this,SLOT(selectedItem(int)));
 }

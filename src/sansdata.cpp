@@ -8,6 +8,7 @@
 
 SANSData::SANSData(int size_x, int size_y, QObject *parent) : QObject(parent)
 {
+    clean();
     if(size_x == 0 || size_y == 0){
         raw_map = nullptr;
     }else{

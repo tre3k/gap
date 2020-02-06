@@ -1,3 +1,12 @@
+/*
+ *  File: importfileswidget.h
+ *  License: GNU GLPv3 (c) 2020
+ *  Autor: Kirill Pshenichnyi
+ *
+ *  This is part of software "gap"
+ */
+
+
 #ifndef IMPORTFILESWIDGET_H
 #define IMPORTFILESWIDGET_H
 

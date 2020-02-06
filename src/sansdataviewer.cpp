@@ -9,6 +9,7 @@
 /*     |   central_layout   |
  *     | - splitter         |
  *     | -- map_plot        |
+ *     |____________________|
  *     | -- buttom_widget   |
  *     | --- form_layout    |
  */
