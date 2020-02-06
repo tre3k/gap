@@ -123,16 +123,34 @@ void ImportFile::parserMLZ(SANSData *sans_data){
             if(line.split('=').first()=="SampleName") sans_data->setSampleName(line.split('=').last());
             if(line.split('=').first()=="Magnet") sans_data->setMagneticField(QString(line.split('=').last()).toDouble());
             if(line.split('=').first()=="Temperature") sans_data->setTemperature(QString(line.split('=').last()).toDouble());
+            if(line.split('=').first()=="Flipper"){
+                if(QString(line.split('=').last())!=""){
+                    if(QString(line.split('=').last()).toDouble() > 1.0){
+                        sans_data->setPolarizationType(SANSData::POLARIZATE_DOWN);
+                    }else{
+                        sans_data->setPolarizationType(SANSData::POLARIZATE_UP);
+                    }
+                }
+            }
             break;
 
         case Setup:
             if(line.split('=').first()=="Lambda") sans_data->setWaveLenght(QString(line.split('=').last()).toDouble());
             if(line.split('=').first()=="SD") sans_data->setDetectorSourceDistance(QString(line.split('=').last()).toDouble());
+            if(line.split('=').first()=="Polarization"){
+                sans_data->setPolarization(line.split('=').last());
+                if(sans_data->getPolarization()=="ng"){
+                    sans_data->setPolarizationType(SANSData::NON_POLARIZATE);
+                }else{
+                    sans_data->Polarizated();
+                }
+            }
             break;
 
         case Counter:
             if(line.split('=').first()=="Time") sans_data->setTimeMeasurement(QString(line.split('=').last()).toDouble());
             if(line.split('=').first()=="Moni1") sans_data->setMonitroCounter(QString(line.split('=').last()).toDouble());
+            if(line.split('=').first()=="Sum") sans_data->setAmountCount(QString(line.split('=').last()).toDouble());
             break;
 
         case History:
@@ -140,7 +158,15 @@ void ImportFile::parserMLZ(SANSData *sans_data){
             break;
 
         case Comment:
-
+            if(sans_data->getProposal()=="" && line.split('=').first()=="Exp_proposal") sans_data->setProposal(line.split('=').last());
+            // in sometimes uses power supply
+            if(line.split('=').first()=="ea_psi_curr_status" && sans_data->getPolarizationType()==SANSData::NON_POLARIZATE){
+                if(line.split('=').last() == "ok"){
+                    sans_data->setPolarizationType(SANSData::POLARIZATE_UP);
+                }else{
+                    sans_data->setPolarizationType(SANSData::POLARIZATE_DOWN);
+                }
+            }
             break;
 
         case Counts:
@@ -181,6 +207,10 @@ void ImportFile::parserMLZ(SANSData *sans_data){
             sans_data->setMapAt(i,j,number_array.at(count));
             count++;
         }
+    }
+
+    if(sans_data->isPolarizated() && sans_data->getPolarizationType()==SANSData::NON_POLARIZATE){
+        sans_data->setPolarizationType(SANSData::POLARIZATED);
     }
 }
 

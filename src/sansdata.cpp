@@ -168,4 +168,8 @@ void SANSData::clean(){
     pol_type = NON_POLARIZATE;
     monitor_percent = .2;
 
+    amount_count = 0.0;
+    is_raw_data = true;
+    is_polarizated = false;
+
 }

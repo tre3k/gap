@@ -34,6 +34,8 @@ SANSDataViewer::SANSDataViewer(QWidget *parent) : GenerealWidget(parent)
     field = new QLabel();
     sample = new QLabel();
     time = new QLabel();
+    amount_count = new QLabel();
+    polarization = new QLabel();
     title = new QLabel();
     title->setWordWrap(true);
     title->setTextInteractionFlags(Qt::TextSelectableByMouse);
@@ -49,7 +51,9 @@ SANSDataViewer::SANSDataViewer(QWidget *parent) : GenerealWidget(parent)
     form_layout->addRow("Sample: ", sample);
     form_layout->addRow("Temperature <i>T</i>: ", temperature);
     form_layout->addRow("Magnetic field <i>H</i>:", field);
+    form_layout->addRow("Plarization: ", polarization);
     form_layout->addRow("Time of measurement: ", time);
+    form_layout->addRow("Amount count: ", amount_count);
     form_layout->addRow("Title: ", title);
     form_layout->addRow("User: ", users);
 
@@ -71,4 +75,22 @@ void SANSDataViewer::viewSANSData(SANSData *sans_data){
     time->setText(QString::number(sans_data->getTimeMeasurement())+" sec");
     title->setText(sans_data->getTitle());
     users->setText(sans_data->getUser());
+    amount_count->setText(QString::number(sans_data->getAmountCount())+" counts");
+    switch(sans_data->getPolarizationType()){
+    case SANSData::NON_POLARIZATE:
+        polarization->setText("<b><font color=\"gray\">NOT POLARIZED</font></b>");
+        break;
+
+    case SANSData::POLARIZATED:
+        polarization->setText("<b>polarized</b>");
+        break;
+
+    case SANSData::POLARIZATE_UP:
+        polarization->setText("<font color=\"red\">UP</font>");
+        break;
+
+    case SANSData::POLARIZATE_DOWN:
+        polarization->setText("<font color=\"green\">DOWN</font>");
+        break;
+    }
 }

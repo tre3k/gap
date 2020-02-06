@@ -46,6 +46,8 @@ private:
     QLabel *proposal;
     QLabel *title;
     QLabel *users;
+    QLabel *polarization;
+    QLabel *amount_count;
 
 signals:
 

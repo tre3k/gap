@@ -23,7 +23,8 @@ public:
     enum polarization_type{
         NON_POLARIZATE,
         POLARIZATE_UP,
-        POLARIzATE_DOWN,
+        POLARIZATE_DOWN,
+        POLARIZATED,
         ALREADY
     };
 
@@ -37,9 +38,10 @@ public:
 
 private:
     double wavelenght;                                      // Wavelenght in Agnstrom [A]
+    double target_wavelenght;
     double ds_distance;                                     // Distance of soruce to detector in meters [m]
     double monitor_counter = 1.0;                           // just monitor counter (before sample enviroment)
-    //double amount_count;                                  // all counts [ - reservate - ]
+    double amount_count;                                    // all counts [ - reservate - ]
     double time = 1.0;                                      // time of measurement int sec [s]
     double field;                                           // magnetic field int Tesla [T]
     double temperature;                                     // temperature of sample in Kelvin [K]
@@ -70,7 +72,11 @@ private:
     bool is_normalize = false;
     bool is_map_created = false;
     polarization_type pol_type;
+    bool is_polarizated;
+    QString polarizator;
     double monitor_percent = .2;                            // efficienty of monitor from 0 to 1, (default 0.2 - 20%)
+
+    bool is_raw_data = true;                                // for raw files, if it is post processing data this value is false
 
 private:
     void initEmptyRawMap();                                 // size_x and size_y must be initialized int s_x and s_y
@@ -85,6 +91,29 @@ public:
     }
     double getDetectorSourceDistance(void){
         return ds_distance;
+    }
+
+    /* Set and Get polarizator */
+    void setPolarization(QString value){
+        polarizator = value;
+    }
+    QString getPolarization(void){
+        return polarizator;
+    }
+
+    bool isPolarizated(void){
+        return is_polarizated;;
+    }
+    void Polarizated(bool value=true){
+        is_polarizated = value;
+    }
+
+    /* Set and Get amount_count */
+    void setAmountCount(double value){
+        amount_count = value;
+    }
+    double getAmountCount(void){
+        return amount_count;
     }
 
     /* Set and  Get "wavelenght" */
@@ -214,6 +243,12 @@ public:
     }
     bool isMapCreated(){
         return is_map_created;
+    }
+    bool isRawData(){
+        return is_raw_data;
+    }
+    void afterProcessing(bool value = true){
+        is_raw_data = value;
     }
 
     void setPolarizationType(polarization_type type){
