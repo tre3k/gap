@@ -18,6 +18,8 @@
 #include "plots.h"
 #include "sansdataviewer.h"
 #include "importfileswidget.h"
+#include "centralwidget.h"
+#include "globalclass.h"
 
 class MainWindow : public QMainWindow
 {

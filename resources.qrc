@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="icons/open_a.svg">icons/open_a.svg</file>
+        <file alias="icons/open_n.svg">icons/open_n.svg</file>
+        <file alias="icons/split.svg">icons/split.svg</file>
+        <file alias="icons/help_a.svg">icons/help_a.svg</file>
+        <file alias="icons/help_n.svg">icons/help_n.svg</file>
+    </qresource>
+</RCC>

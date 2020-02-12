@@ -28,6 +28,7 @@ class ImportFilesWidget : public GenerealWidget
     Q_OBJECT
 public:
     explicit ImportFilesWidget(QWidget *parent = nullptr);
+    ~ImportFilesWidget();
 
     QStringList getOpenFiles(void){
         return open_files;
@@ -62,6 +63,8 @@ public slots:
     void changeCheckState(QModelIndex model_index);
     void selectedItem(int row);
     void cleanSelected();
+
+    void importRelease();
 
 };
 

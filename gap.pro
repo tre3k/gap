@@ -6,7 +6,9 @@ TARGET = gap
 TEMPLATE = app
 
 SOURCES += \
+        src/centralwidget.cpp \
         src/generealwidget.cpp \
+        src/globalclass.cpp \
         src/importfile.cpp \
         src/importfileswidget.cpp \
         src/sansdata.cpp \
@@ -15,10 +17,13 @@ SOURCES += \
         src/plots.cpp \
         src/external/qcustomplot.cpp \
         src/sansdataviewer.cpp \
-        src/toolwidgets.cpp
+        src/toolwidgets.cpp \
+        src/dialogs.cpp
 
 HEADERS += \
+        src/centralwidget.h \
         src/generealwidget.h \
+        src/globalclass.h \
         src/importfile.h \
         src/importfileswidget.h \
         src/sansdata.h \
@@ -26,9 +31,13 @@ HEADERS += \
         src/plots.h \
         src/external/qcustomplot.h \
         src/sansdataviewer.h \
-        src/toolwidgets.h
+        src/toolwidgets.h \
+        src/dialogs.h
 
 INCLUDEPATH += \
             src/ \
             src/external
+
+RESOURCES += \
+    resources.qrc
 

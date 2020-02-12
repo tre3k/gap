@@ -65,7 +65,10 @@ ImportFilesWidget::ImportFilesWidget(QWidget *parent) : GenerealWidget(parent)
     connect(select_all_button,SIGNAL(clicked()),this,SLOT(selectAll()));
     connect(unselect_all_button,SIGNAL(clicked()),this,SLOT(unselectAll()));
     connect(clean_button,SIGNAL(clicked()),this, SLOT(cleanSelected()));
+    connect(import_button,SIGNAL(clicked()),this,SLOT(importRelease()));
+}
 
+ImportFilesWidget::~ImportFilesWidget(){
 
 }
 
@@ -155,4 +158,9 @@ void ImportFilesWidget::cleanSelected(){
         }
     }
     connect(list_widget,SIGNAL(currentRowChanged(int)),this,SLOT(selectedItem(int)));
+}
+
+
+void ImportFilesWidget::importRelease(){
+
 }
