@@ -9,8 +9,14 @@
 
 #include "globalclass.h"
 
+SANSDataMath::SANSDataMath(QObject *parent) : QObject(parent){
+
+}
+
 FolderClass::FolderClass(QString name, QObject *parent) : QObject(parent)
 {
+    setFolderName(name);
+
 
 }
 

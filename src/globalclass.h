@@ -15,10 +15,33 @@
 
 #include "sansdata.h"
 
+class SANSDataMath : public QObject{
+    Q_OBJECT
+public:
+    explicit SANSDataMath(QObject *parent = nullptr);
+
+    //void calculate();    // foreground - background
+    //void multiply(SANSData *);
+
+private:
+    QVector<SANSData *> background;
+    QVector<SANSData *> foreground;
+
+    SANSData *result;
+
+};
+
+
+/* =============================== Folder CLASS =============================== */
 class FolderClass : public QObject{
     Q_OBJECT
 public:
     explicit FolderClass(QString name = "", QObject *parent = nullptr);
+    QVector<SANSData *> imorted;
+    // for somes temperature and magnet field
+    //QVector<QVector <SANSDataMath *>> sans_data_math;
+    typedef QVector<SANSDataMath *> fileds_points;
+
 
     void setFolderName(QString name){
         folder_name = name;
@@ -40,7 +63,7 @@ public:
     explicit GlobalClass(QObject *parent = nullptr);
 
     QVector<FolderClass *> folders;
-    QVector<SANSData> imorted;
+
 
 signals:
 
